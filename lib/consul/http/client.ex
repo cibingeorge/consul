@@ -1,8 +1,10 @@
 defmodule Consul.HTTP.Client do
   use HTTPoison.Base
 
+  @endpoint Application.get_env(:consul, :endpoint, "http://localhost:8500")
+
   def process_url(url) do
-    "http://localhost:8500/#{url}"
+    "#{@endpoint}/#{url}"
   end
 
   def process_response_body(body) do
