@@ -87,25 +87,25 @@ defmodule Consul.HTTP.Raw do
         path: ["v1", "agent", "check", "deregister", {:var, :check_id}],
         name: :agent_check_deregister,
         args: [:check_id],
-        method: :get
+        method: :put
       },
       %{
         path: ["v1", "agent", "check", "pass", {:var, :check_id}],
         name: :agent_check_pass,
         args: [:check_id],
-        method: :get
+        method: :put
       },
       %{
         path: ["v1", "agent", "check", "warn", {:var, :check_id}],
         name: :agent_check_warn,
         args: [:check_id],
-        method: :get
+        method: :put
       },
       %{
         path: ["v1", "agent", "check", "fail", {:var, :check_id}],
         name: :agent_check_fail,
         args: [:check_id],
-        method: :get
+        method: :put
       },
       %{
         path: ["v1", "agent", "check", "update", {:var, :check_id}],
