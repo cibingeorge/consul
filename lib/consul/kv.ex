@@ -57,13 +57,18 @@ defmodule Consul.KV do
   @spec get(path, options) :: t
   def get(path, options) do
     res = @client.kv_get(path, options)
-    %__MODULE__{
-      key:          key(res),
-      value:        value(res),
-      flags:        flags(res),
-      lock_index:   lock_index(res),
-      create_index: create_index(res),
-      modify_index: modify_index(res)
-    }
+    case res do
+      %HTTPoison.Response{status_code: 200} ->
+        response = %__MODULE__{
+          key:          key(res),
+          value:        value(res),
+          flags:        flags(res),
+          lock_index:   lock_index(res),
+          create_index: create_index(res),
+          modify_index: modify_index(res)
+        }
+        {:ok, response}
+      _ -> {:error, res}
+    end
   end
 end
